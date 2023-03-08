@@ -1,0 +1,27 @@
+---
+title: "How to do stuff in scala"
+author: "Darren Kidney"
+date: '`r format(Sys.Date(), "%d %b %Y")`'
+output:
+    html_document:
+        toc: false
+---
+
+*********************************************************************
+
+## resources
+
+* [scala-lang.org](https://www.scala-lang.org)  
+
+## tutorials
+
+
+## books
+
+
+## blogs
+
+
+## todo
+
+* asdf
