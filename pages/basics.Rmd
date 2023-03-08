@@ -2,9 +2,6 @@
 title: scala basics
 ---
 
-```{r knitr_config, code=readLines("_knitr_config.R"), echo=FALSE}
-```
-
 *********************************************************************
 
 > scala basics
@@ -19,9 +16,22 @@ title: scala basics
 
 ## setup
 
+### scala
+
 ```sh
 brew install scala # install scala
+```
+
+### sbt
+
+```sh
 brew install sbt # install sbt
+```
+
+### vs code
+
+```sh
 brew install --cask visual-studio-code # install vscode
 ```
 
+extensions scala (Metals)

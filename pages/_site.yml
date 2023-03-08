@@ -8,10 +8,6 @@ navbar:
         - text: "basics"
           href: basics.html
         - text: "---------"
-    - text: "std"
-      menu:
-        - text: "todo"
-          href: _todo.html
   right:
     - text: "how2"
       menu:
