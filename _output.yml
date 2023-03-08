@@ -6,5 +6,4 @@ html_document:
     # toc_float:
     #   collapsed: true
     #   smooth_scroll: true
-    css:
-      _style.css
+    css: _style.css
