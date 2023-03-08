@@ -1,0 +1,27 @@
+---
+title: scala basics
+---
+
+```{r knitr_config, code=readLines("_knitr_config.R"), echo=FALSE}
+```
+
+*********************************************************************
+
+> The Scala Programming Language
+
+*********************************************************************
+
+## links
+
+* https://www.scala-lang.org
+
+*********************************************************************
+
+## setup
+
+```sh
+brew install scala # install scala
+brew install sbt # install sbt
+brew install --cask visual-studio-code # install vscode
+```
+

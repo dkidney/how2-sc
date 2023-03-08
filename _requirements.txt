@@ -1,0 +1,13 @@
+apache-airflow
+beautifulsoup4
+boto3
+folium
+hocon
+ipython
+matplotlib
+numpy
+pandas
+pyarrow
+seaborn
+sklearn
+xmltodict

@@ -18,6 +18,7 @@
 /*.Rcheck/
 
 # RStudio files
+*.Rproj
 .Rproj.user/
 
 # produced vignettes
@@ -37,3 +38,13 @@ vignettes/*.pdf
 
 # R Environment Variables
 .Renviron
+
+# R website build files
+site_libs/**
+
+# mac os
+.DS_Store
+
+# python
+.ipynb_checkpoints/
+
