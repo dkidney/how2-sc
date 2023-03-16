@@ -4,28 +4,61 @@ title: scala basics
 
 *********************************************************************
 
-> scala basics
-
-*********************************************************************
-
 ## links
 
-* https://www.scala-lang.org
+https://docs.scala-lang.org/online-courses.html
+
+* https://towardsdatascience.com/introduction-to-scala-921fd65cd5bf
+
+https://www.youtube.com/playlist?list=PLmtsMNDRU0BxryRX4wiwrTZ661xcp6VPM
 
 *********************************************************************
 
 ## setup
 
+### java 
+
+need Java 1.8 or greater 
+
+```sh
+brew install openjdk@8 # install Java Software Development Kit (SDK) 1.8
+jenv local 1.8   
+java –version
+```
+
 ### scala
 
 ```sh
 brew install scala # install scala
+scala -version # check version
 ```
+
 
 ### sbt
 
+https://blog.rockthejvm.com/sbt-tutorial/
+
 ```sh
 brew install sbt # install sbt
+sbt -version  
+sbt about
+sbt new scala/hello-world.g8 # set up a hello-world project using scala 2
+sbt new scala/scala3.g8 # set up a hello-world project using scala 3
+```
+
+
+
+```
+project/
+  build.properties
+src/
+  main/
+    resources/
+    scala/
+  test/
+    resources/
+    scala/
+build.sbt
 ```
 
 ### vs code
@@ -35,3 +68,94 @@ brew install --cask visual-studio-code # install vscode
 ```
 
 extensions scala (Metals)
+
+
+## comments
+
+```scala
+// Single line comment
+
+/* Multi-line comments
+   syntax */
+```
+
+## types
+
+* Boolean - `true` and `false`
+* Int - 32-bit signed integer: -2^31 to 2^31-1
+* Double - 64-bit floating poit number
+* Sting
+
+## methods
+
+```scala
+// scala 3
+def myMethod(param1: Double, param2: Double): Double = 
+    val intermediateValue = param1 + param2
+    intermediateValue * 2
+
+// scala 2 (also supported by scala 3)
+def myMethod(param1: Double, param2: Double): Double = {
+    val intermediateValue = param1 + param2
+    intermediateValue * 2
+}
+```
+
+## lexial scope
+
+```scala
+// the value ten is not available outside the scope of the block
+val tenSquared: Int =
+  val ten = 10
+  ten * ten
+```
+
+## conditions
+
+```scala
+// scala 3
+if something then 
+    this
+else if somethingelse then
+    that
+else 
+    whatever
+
+// scala 2
+if (something) {
+    this
+} else {
+    if (somethingelse) {
+        that
+    } else {
+        whatever
+    }
+}
+```
+
+## definitions
+
+* `def` - the body of the definition gets evaluated every time the name is used
+* `val` - the body of the definition gets evaluated once, the results is reused every time the name is used
+* `var` - ???
+
+By using `def` you can delay evaluation in the code until it is needed.
+
+## case class
+
+```scala
+// scala 3
+case class Rectangle(width: Int, height: Int):
+    val area = width * height
+
+// scala 2
+case class Rectangle(width: Int, height: Int) {
+    val area = width * height
+}
+
+val facade = Rectangle(5, 3)
+facade.area
+```
+
+
+

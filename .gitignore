@@ -45,3 +45,5 @@ vignettes/*.pdf
 # python
 .ipynb_checkpoints/
 
+# jenv
+.java-version

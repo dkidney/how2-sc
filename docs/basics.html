@@ -396,41 +396,163 @@ $(document).ready(function () {
 <li><a href="#links" id="toc-links">links</a></li>
 <li><a href="#setup" id="toc-setup">setup</a>
 <ul>
+<li><a href="#java" id="toc-java">java</a></li>
 <li><a href="#scala" id="toc-scala">scala</a></li>
 <li><a href="#sbt" id="toc-sbt">sbt</a></li>
 <li><a href="#vs-code" id="toc-vs-code">vs code</a></li>
 </ul></li>
+<li><a href="#comments" id="toc-comments">comments</a></li>
+<li><a href="#types" id="toc-types">types</a></li>
+<li><a href="#methods" id="toc-methods">methods</a></li>
+<li><a href="#lexial-scope" id="toc-lexial-scope">lexial scope</a></li>
+<li><a href="#conditions" id="toc-conditions">conditions</a></li>
+<li><a href="#definitions" id="toc-definitions">definitions</a></li>
+<li><a href="#case-class" id="toc-case-class">case class</a></li>
 </ul>
 </div>
 
 <hr />
-<blockquote>
-<p>scala basics</p>
-</blockquote>
-<hr />
 <div id="links" class="section level2">
 <h2>links</h2>
+<p><a href="https://docs.scala-lang.org/online-courses.html"
+class="uri">https://docs.scala-lang.org/online-courses.html</a></p>
 <ul>
-<li><a href="https://www.scala-lang.org"
-class="uri">https://www.scala-lang.org</a></li>
+<li><a
+href="https://towardsdatascience.com/introduction-to-scala-921fd65cd5bf"
+class="uri">https://towardsdatascience.com/introduction-to-scala-921fd65cd5bf</a></li>
 </ul>
+<p><a
+href="https://www.youtube.com/playlist?list=PLmtsMNDRU0BxryRX4wiwrTZ661xcp6VPM"
+class="uri">https://www.youtube.com/playlist?list=PLmtsMNDRU0BxryRX4wiwrTZ661xcp6VPM</a></p>
 <hr />
 </div>
 <div id="setup" class="section level2">
 <h2>setup</h2>
+<div id="java" class="section level3">
+<h3>java</h3>
+<p>need Java 1.8 or greater</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">brew</span> install openjdk@8 <span class="co"># install Java Software Development Kit (SDK) 1.8</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">jenv</span> local 1.8   </span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="ex">java</span> –version</span></code></pre></div>
+</div>
 <div id="scala" class="section level3">
 <h3>scala</h3>
-<div class="sourceCode" id="cb1"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">brew</span> install scala <span class="co"># install scala</span></span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">brew</span> install scala <span class="co"># install scala</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="ex">scala</span> <span class="at">-version</span> <span class="co"># check version</span></span></code></pre></div>
 </div>
 <div id="sbt" class="section level3">
 <h3>sbt</h3>
-<div class="sourceCode" id="cb2"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">brew</span> install sbt <span class="co"># install sbt</span></span></code></pre></div>
+<p><a href="https://blog.rockthejvm.com/sbt-tutorial/"
+class="uri">https://blog.rockthejvm.com/sbt-tutorial/</a></p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">brew</span> install sbt <span class="co"># install sbt</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="ex">sbt</span> <span class="at">-version</span>  </span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="ex">sbt</span> about</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="ex">sbt</span> new scala/hello-world.g8 <span class="co"># set up a hello-world project using scala 2</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="ex">sbt</span> new scala/scala3.g8 <span class="co"># set up a hello-world project using scala 3</span></span></code></pre></div>
+<pre><code>project/
+  build.properties
+src/
+  main/
+    resources/
+    scala/
+  test/
+    resources/
+    scala/
+build.sbt</code></pre>
 </div>
 <div id="vs-code" class="section level3">
 <h3>vs code</h3>
-<div class="sourceCode" id="cb3"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">brew</span> install <span class="at">--cask</span> visual-studio-code <span class="co"># install vscode</span></span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">brew</span> install <span class="at">--cask</span> visual-studio-code <span class="co"># install vscode</span></span></code></pre></div>
 <p>extensions scala (Metals)</p>
 </div>
+</div>
+<div id="comments" class="section level2">
+<h2>comments</h2>
+<div class="sourceCode" id="cb6"><pre
+class="sourceCode scala"><code class="sourceCode scala"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Single line comment</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co">/* Multi-line comments</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co">   syntax */</span></span></code></pre></div>
+</div>
+<div id="types" class="section level2">
+<h2>types</h2>
+<ul>
+<li>Boolean - <code>true</code> and <code>false</code></li>
+<li>Int - 32-bit signed integer: -2^31 to 2^31-1</li>
+<li>Double - 64-bit floating poit number</li>
+<li>Sting</li>
+</ul>
+</div>
+<div id="methods" class="section level2">
+<h2>methods</h2>
+<div class="sourceCode" id="cb7"><pre
+class="sourceCode scala"><code class="sourceCode scala"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co">// scala 3</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> <span class="fu">myMethod</span><span class="op">(</span>param1<span class="op">:</span> <span class="ex">Double</span><span class="op">,</span> param2<span class="op">:</span> <span class="ex">Double</span><span class="op">):</span> <span class="ex">Double</span> <span class="op">=</span> </span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">val</span> intermediateValue <span class="op">=</span> param1 <span class="op">+</span> param2</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    intermediateValue <span class="op">*</span> <span class="dv">2</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="co">// scala 2 (also supported by scala 3)</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> <span class="fu">myMethod</span><span class="op">(</span>param1<span class="op">:</span> <span class="ex">Double</span><span class="op">,</span> param2<span class="op">:</span> <span class="ex">Double</span><span class="op">):</span> <span class="ex">Double</span> <span class="op">=</span> <span class="op">{</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>    <span class="kw">val</span> intermediateValue <span class="op">=</span> param1 <span class="op">+</span> param2</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>    intermediateValue <span class="op">*</span> <span class="dv">2</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+</div>
+<div id="lexial-scope" class="section level2">
+<h2>lexial scope</h2>
+<div class="sourceCode" id="cb8"><pre
+class="sourceCode scala"><code class="sourceCode scala"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">// the value ten is not available outside the scope of the block</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="kw">val</span> tenSquared<span class="op">:</span> <span class="bu">Int</span> <span class="op">=</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="kw">val</span> ten <span class="op">=</span> <span class="dv">10</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  ten <span class="op">*</span> ten</span></code></pre></div>
+</div>
+<div id="conditions" class="section level2">
+<h2>conditions</h2>
+<div class="sourceCode" id="cb9"><pre
+class="sourceCode scala"><code class="sourceCode scala"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co">// scala 3</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> something then </span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">this</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span> <span class="cf">if</span> somethingelse then</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>    that</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span> </span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>    whatever</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="co">// scala 2</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="op">(</span>something<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>    <span class="kw">this</span></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a><span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>somethingelse<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>        that</span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>        whatever</span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+</div>
+<div id="definitions" class="section level2">
+<h2>definitions</h2>
+<ul>
+<li><code>def</code> - the body of the definition gets evaluated every
+time the name is used</li>
+<li><code>val</code> - the body of the definition gets evaluated once,
+the results is reused every time the name is used</li>
+<li><code>var</code> - ???</li>
+</ul>
+<p>By using <code>def</code> you can delay evaluation in the code until
+it is needed.</p>
+</div>
+<div id="case-class" class="section level2">
+<h2>case class</h2>
+<div class="sourceCode" id="cb10"><pre
+class="sourceCode scala"><code class="sourceCode scala"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co">// scala 3</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="cf">case</span> <span class="kw">class</span> <span class="ex">Rectangle</span><span class="op">(</span>width<span class="op">:</span> <span class="bu">Int</span><span class="op">,</span> height<span class="op">:</span> <span class="bu">Int</span><span class="op">):</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">val</span> area <span class="op">=</span> width <span class="op">*</span> height</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="co">// scala 2</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="cf">case</span> <span class="kw">class</span> <span class="ex">Rectangle</span><span class="op">(</span>width<span class="op">:</span> <span class="bu">Int</span><span class="op">,</span> height<span class="op">:</span> <span class="bu">Int</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>    <span class="kw">val</span> area <span class="op">=</span> width <span class="op">*</span> height</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a><span class="kw">val</span> facade <span class="op">=</span> <span class="ex">Rectangle</span><span class="op">(</span><span class="dv">5</span><span class="op">,</span> <span class="dv">3</span><span class="op">)</span></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>facade<span class="op">.</span>area</span></code></pre></div>
 </div>
 
 

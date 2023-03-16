@@ -11,16 +11,25 @@ output:
 
 ## resources
 
+### general
+
 * [scala-lang.org](https://www.scala-lang.org)  
 
-## tutorials
+  * [Getting started](https://docs.scala-lang.org/getting-started/index.html)
 
+  * [Tour of Scala](https://docs.scala-lang.org/tour/tour-of-scala.html)
 
-## books
+### tutorials
 
+* [tutorialspoint tutorial](https://www.tutorialspoint.com/scala/)
 
-## blogs
+### books
 
+* [Programming in Scala (Odersky et al.)](https://people.cs.ksu.edu/~schmidt/705a/Scala/Programming-in-Scala.pdf)
+
+### blogs
+
+*********************************************************************
 
 ## todo
 
