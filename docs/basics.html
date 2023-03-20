@@ -343,6 +343,19 @@ $(document).ready(function () {
     <li class="divider"></li>
   </ul>
 </li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    std
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="collection.html">collection</a>
+    </li>
+    <li class="divider"></li>
+  </ul>
+</li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li class="dropdown">
@@ -408,6 +421,13 @@ $(document).ready(function () {
 <li><a href="#conditions" id="toc-conditions">conditions</a></li>
 <li><a href="#definitions" id="toc-definitions">definitions</a></li>
 <li><a href="#case-class" id="toc-case-class">case class</a></li>
+<li><a href="#sealed-traits" id="toc-sealed-traits">sealed
+traits</a></li>
+<li><a href="#enumerations" id="toc-enumerations">enumerations</a></li>
+<li><a href="#functions" id="toc-functions">Functions</a>
+<ul>
+<li><a href="#placeholders" id="toc-placeholders">placeholders</a></li>
+</ul></li>
 </ul>
 </div>
 
@@ -553,6 +573,120 @@ class="sourceCode scala"><code class="sourceCode scala"><span id="cb10-1"><a hre
 <span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a><span class="kw">val</span> facade <span class="op">=</span> <span class="ex">Rectangle</span><span class="op">(</span><span class="dv">5</span><span class="op">,</span> <span class="dv">3</span><span class="op">)</span></span>
 <span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>facade<span class="op">.</span>area</span></code></pre></div>
+<p>Case classes are immutable, but you can make copies and update the
+values of some of the fields</p>
+<div class="sourceCode" id="cb11"><pre
+class="sourceCode scala"><code class="sourceCode scala"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="kw">val</span> r1 <span class="op">=</span> <span class="ex">Rectangle</span><span class="op">(</span>width<span class="op">=</span><span class="dv">10</span><span class="op">,</span> height<span class="op">=</span><span class="dv">20</span><span class="op">)</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="kw">val</span> r2 <span class="op">=</span> r1<span class="op">.</span><span class="fu">copy</span><span class="op">(</span>width<span class="op">=</span><span class="dv">5</span><span class="op">)</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="kw">val</span> r3 <span class="op">=</span> r1<span class="op">.</span><span class="fu">copy</span><span class="op">(</span>width<span class="op">=</span>r1<span class="op">.</span>height <span class="op">*</span> <span class="dv">2</span><span class="op">)</span></span></code></pre></div>
+</div>
+<div id="sealed-traits" class="section level2">
+<h2>sealed traits</h2>
+<p>Traits are abstract types - they don’t use constructors.</p>
+<div class="sourceCode" id="cb12"><pre
+class="sourceCode scala"><code class="sourceCode scala"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="kw">sealed</span> <span class="kw">trait</span> <span class="ex">Shape</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="cf">case</span> <span class="kw">class</span> <span class="ex">Rectangle</span><span class="op">(</span>width<span class="op">:</span> <span class="bu">Int</span><span class="op">,</span> height<span class="op">:</span> <span class="bu">Int</span><span class="op">)</span> <span class="kw">extends</span> <span class="ex">Shape</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="cf">case</span> <span class="kw">class</span> <span class="fu">Circle</span><span class="op">(</span>radius<span class="op">:</span> <span class="bu">Int</span><span class="op">)</span> <span class="kw">extends</span> <span class="ex">Shape</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="kw">val</span> shape1<span class="op">:</span> <span class="ex">Shape</span> <span class="op">=</span> <span class="ex">Rectangle</span><span class="op">(</span><span class="dv">3</span><span class="op">,</span> <span class="dv">4</span><span class="op">)</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="kw">val</span> shape2<span class="op">:</span> <span class="ex">Shape</span> <span class="op">=</span> <span class="fu">Circle</span><span class="op">(</span><span class="dv">5</span><span class="op">)</span></span></code></pre></div>
+<p>In the example above, types Rectangle and Circle are subtypes of
+Shape.</p>
+<p>To extract the members of the subshape you need to use a match
+expression - e.g.:</p>
+<div class="sourceCode" id="cb13"><pre
+class="sourceCode scala"><code class="sourceCode scala"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co">// scala 3</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="kw">val</span> shape1Area <span class="op">=</span> </span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    shape1 <span class="cf">match</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>        <span class="cf">case</span> <span class="ex">Rectangle</span><span class="op">(</span>width<span class="op">,</span> height<span class="op">)</span> <span class="op">=&gt;</span> width <span class="op">*</span> height</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">case</span> <span class="fu">Circle</span><span class="op">(</span>radius<span class="op">)</span>           <span class="op">=&gt;</span> radius <span class="op">*</span> radius <span class="op">*</span> <span class="fl">3.14</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="co">// scala 2</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a><span class="kw">val</span> shape1Area <span class="op">=</span> </span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>    shape1 <span class="cf">match</span> <span class="op">{</span></span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>        <span class="cf">case</span> <span class="ex">Rectangle</span><span class="op">(</span>width<span class="op">,</span> height<span class="op">)</span> <span class="op">=&gt;</span> width <span class="op">*</span> height</span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>        <span class="cf">case</span> <span class="fu">Circle</span><span class="op">(</span>radius<span class="op">)</span>           <span class="op">=&gt;</span> radius <span class="op">*</span> radius <span class="op">*</span> <span class="fl">3.14</span></span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span></code></pre></div>
+<p>or e.g.:</p>
+<div class="sourceCode" id="cb14"><pre
+class="sourceCode scala"><code class="sourceCode scala"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co">// scala 3</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="kw">val</span> shape1Area <span class="op">=</span> </span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>    shape1 <span class="cf">match</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>        <span class="cf">case</span> c<span class="op">:</span> Circle <span class="op">=&gt;</span> c<span class="op">.</span>area</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">case</span> _         <span class="op">=&gt;</span> <span class="st">&quot;Oops, this is not a circle...&quot;</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="co">// scala 2</span></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a><span class="kw">val</span> shape1Area <span class="op">=</span> </span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>    shape1 <span class="cf">match</span> <span class="op">{</span></span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>        <span class="cf">case</span> c<span class="op">:</span> Circle <span class="op">=&gt;</span> c<span class="op">.</span>area</span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>        <span class="cf">case</span> _         <span class="op">=&gt;</span> <span class="st">&quot;Oops, this is not a circle...&quot;</span></span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span></code></pre></div>
+</div>
+<div id="enumerations" class="section level2">
+<h2>enumerations</h2>
+<p>Defines a type and the possible values.</p>
+<div class="sourceCode" id="cb15"><pre
+class="sourceCode scala"><code class="sourceCode scala"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>enum PrimaryColour<span class="op">:</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">case</span> Red<span class="op">,</span> Blue<span class="op">,</span> Yellow</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>PrimaryColour<span class="op">.</span>Red</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>PrimaryColour<span class="op">.</span>Blue</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>PrimaryColour<span class="op">.</span>Yellow</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>PrimaryColour<span class="op">.</span>values <span class="co">// returns an array with all the possible values</span></span></code></pre></div>
+<p>E.g. Can write definitions that return a specific value, given the
+value of an input object of type PrimaryColour.</p>
+<div class="sourceCode" id="cb16"><pre
+class="sourceCode scala"><code class="sourceCode scala"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> <span class="fu">isItMyFavouriteColour</span><span class="op">(</span>colour<span class="op">:</span> PrimaryColour<span class="op">):</span> <span class="ex">Boolean</span> <span class="op">=</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>    colour <span class="cf">match</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>        <span class="cf">case</span> PrimaryColour<span class="op">.</span>Red <span class="op">=&gt;</span> <span class="kw">false</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>        <span class="cf">case</span> PrimaryColour<span class="op">.</span>Blue <span class="op">=&gt;</span> <span class="kw">true</span>        </span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">case</span> PrimaryColour<span class="op">.</span>Yellow <span class="op">=&gt;</span> <span class="kw">false</span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="fu">isItMyFavouriteColour</span><span class="op">(</span>PrimaryColour<span class="op">.</span>Red<span class="op">)</span> <span class="co">// false</span></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="fu">isItMyFavouriteColour</span><span class="op">(</span>PrimaryColour<span class="op">.</span>Blue<span class="op">)</span> <span class="co">// true</span></span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a><span class="fu">isItMyFavouriteColour</span><span class="op">(</span>PrimaryColour<span class="op">.</span>Yellow<span class="op">)</span> <span class="co">// false</span></span></code></pre></div>
+<p>Enumerations are just shorthand for a sealed trait and case objects
+that extend this trait</p>
+<div class="sourceCode" id="cb17"><pre
+class="sourceCode scala"><code class="sourceCode scala"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="kw">sealed</span> <span class="kw">trait</span> PrimaryColour</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="kw">object</span> PrimaryColour<span class="op">:</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">case</span> <span class="kw">object</span> Red <span class="kw">extends</span> PrimaryColour</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">case</span> <span class="kw">object</span> Blue <span class="kw">extends</span> PrimaryColour</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">case</span> <span class="kw">object</span> Yellow <span class="kw">extends</span> PrimaryColour</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>    <span class="kw">val</span> values <span class="op">=</span> <span class="ex">Array</span><span class="op">(</span>Red<span class="op">,</span> Blue<span class="op">,</span> Yellow<span class="op">)</span></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">valueOf</span><span class="op">(</span>label<span class="op">:</span> <span class="ex">String</span><span class="op">):</span> PrimaryColour <span class="op">=</span> <span class="op">...</span></span></code></pre></div>
+</div>
+<div id="functions" class="section level2">
+<h2>Functions</h2>
+<p>Difference between functions and methods</p>
+<div class="sourceCode" id="cb18"><pre
+class="sourceCode scala"><code class="sourceCode scala"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> <span class="fu">increment</span><span class="op">(</span>x<span class="op">:</span> <span class="bu">Int</span><span class="op">):</span> <span class="bu">Int</span> <span class="op">=</span> x <span class="op">+</span> <span class="dv">1</span>  \\ method</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="kw">val</span> increment<span class="op">:</span> <span class="bu">Int</span> <span class="op">=&gt;</span> <span class="bu">Int</span> <span class="op">=</span> x <span class="op">=&gt;</span> x <span class="op">+</span> <span class="dv">1</span> \\ function</span></code></pre></div>
+<p>Functions define values that can be passed as parameters or returned
+as a result.</p>
+<p>You cannot do these things with methods.</p>
+<p>Basic structure of functions</p>
+<pre><code>val function_name: parameter_type(s) =&gt; result_type = parameter_name(s) =&gt; function_body</code></pre>
+<div class="sourceCode" id="cb20"><pre
+class="sourceCode scala"><code class="sourceCode scala"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co">// single parameters</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="kw">val</span> incremement<span class="op">:</span> <span class="bu">Int</span> <span class="op">=&gt;</span> <span class="bu">Int</span> <span class="op">=</span> x <span class="op">=&gt;</span> x <span class="op">+</span> <span class="dv">1</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="kw">val</span> incremement <span class="op">=</span> <span class="op">(</span>x<span class="op">:</span> <span class="bu">Int</span><span class="op">)</span> <span class="op">=&gt;</span> x <span class="op">+</span> <span class="dv">1</span>      <span class="co">// compiler infers result type</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="co">// multiple parameters</span></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a><span class="kw">val</span> add<span class="op">:</span> <span class="op">(</span><span class="bu">Int</span><span class="op">,</span> <span class="bu">Int</span><span class="op">)</span> <span class="op">=&gt;</span> <span class="bu">Int</span> <span class="op">=</span> <span class="op">(</span>x<span class="op">,</span> y<span class="op">)</span> <span class="op">=&gt;</span> x <span class="op">+</span> y</span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a><span class="kw">val</span> add <span class="op">=</span> <span class="op">(</span>x<span class="op">:</span> <span class="bu">Int</span><span class="op">,</span> y<span class="op">:</span> <span class="bu">Int</span><span class="op">)</span> <span class="op">=&gt;</span> x <span class="op">+</span> y      <span class="co">// compiler infers result type</span></span></code></pre></div>
+<div id="placeholders" class="section level3">
+<h3>placeholders</h3>
+<p>Functions whose body use their arguments exactly once don’t need to
+name them - instead you can use a placeholder represented by an
+underscore.</p>
+<div class="sourceCode" id="cb21"><pre
+class="sourceCode scala"><code class="sourceCode scala"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="kw">val</span> incremement<span class="op">:</span> <span class="bu">Int</span> <span class="op">=&gt;</span> <span class="bu">Int</span> <span class="op">=</span> x <span class="op">=&gt;</span> x <span class="op">+</span> <span class="dv">1</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="kw">val</span> incremement<span class="op">:</span> <span class="bu">Int</span> <span class="op">=&gt;</span> <span class="bu">Int</span> <span class="op">=</span> _ <span class="op">+</span> <span class="dv">1</span>      <span class="co">// equivalent using placeholder</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="kw">val</span> incremement <span class="op">=</span> <span class="op">(</span>x<span class="op">:</span> <span class="bu">Int</span><span class="op">)</span> <span class="op">=&gt;</span> x <span class="op">+</span> <span class="dv">1</span>      </span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a><span class="kw">val</span> incremement <span class="op">=</span> <span class="op">(</span>_<span class="op">:</span> <span class="bu">Int</span><span class="op">)</span> <span class="op">+</span> <span class="dv">1</span>           <span class="co">// equivalent using placeholder</span></span></code></pre></div>
+</div>
 </div>
 
 

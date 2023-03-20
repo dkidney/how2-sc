@@ -157,5 +157,171 @@ val facade = Rectangle(5, 3)
 facade.area
 ```
 
+Case classes are immutable, but you can make copies and update the values of some of the fields
+
+```scala
+val r1 = Rectangle(width=10, height=20)
+val r2 = r1.copy(width=5)
+val r3 = r1.copy(width=r1.height * 2)
+```
+
+## sealed traits
+
+Traits are abstract types - they don't use constructors.
+
+```scala
+sealed trait Shape
+case class Rectangle(width: Int, height: Int) extends Shape
+case class Circle(radius: Int) extends Shape
+
+val shape1: Shape = Rectangle(3, 4)
+val shape2: Shape = Circle(5)
+```
+
+In the example above, types Rectangle and Circle are subtypes of Shape.
+
+To extract the members of the subshape you need to use a match expression - e.g.:
+
+```scala
+// scala 3
+val shape1Area = 
+    shape1 match
+        case Rectangle(width, height) => width * height
+        case Circle(radius)           => radius * radius * 3.14
+
+// scala 2
+val shape1Area = 
+    shape1 match {
+        case Rectangle(width, height) => width * height
+        case Circle(radius)           => radius * radius * 3.14
+    }
+```
+
+or e.g.:
+
+```scala
+// scala 3
+val shape1Area = 
+    shape1 match
+        case c: Circle => c.area
+        case _         => "Oops, this is not a circle..."
+
+// scala 2
+val shape1Area = 
+    shape1 match {
+        case c: Circle => c.area
+        case _         => "Oops, this is not a circle..."
+    }
+```
+
+## enumerations
+
+Defines a type and the possible values.
+
+```scala
+enum PrimaryColour:
+    case Red, Blue, Yellow
+    
+PrimaryColour.Red
+PrimaryColour.Blue
+PrimaryColour.Yellow
+PrimaryColour.values // returns an array with all the possible values
+```
+
+E.g. Can write definitions that return a specific value, given the value of an input object of type PrimaryColour.
+
+```scala
+def isItMyFavouriteColour(colour: PrimaryColour): Boolean =
+    colour match
+        case PrimaryColour.Red => false
+        case PrimaryColour.Blue => true        
+        case PrimaryColour.Yellow => false
+        
+isItMyFavouriteColour(PrimaryColour.Red) // false
+isItMyFavouriteColour(PrimaryColour.Blue) // true
+isItMyFavouriteColour(PrimaryColour.Yellow) // false
+```
+
+Enumerations are just shorthand for a sealed trait and case objects that extend this trait
+
+```scala
+sealed trait PrimaryColour
+object PrimaryColour:
+    case object Red extends PrimaryColour
+    case object Blue extends PrimaryColour
+    case object Yellow extends PrimaryColour
+    val values = Array(Red, Blue, Yellow)
+    def valueOf(label: String): PrimaryColour = ...
+```
+
+## Functions
+
+Difference between functions and methods
+
+```scala
+def increment(x: Int): Int = x + 1  \\ method
+val increment: Int => Int = x => x + 1 \\ function
+```
+
+Functions define values that can be passed as parameters or returned as a result.
+
+You cannot do these things with methods.
+
+Basic structure of functions
+
+```
+val function_name: parameter_type(s) => result_type = parameter_name(s) => function_body
+```
+
+```scala
+// single parameters
+val incremement: Int => Int = x => x + 1
+val incremement = (x: Int) => x + 1      // compiler infers result type
+
+// multiple parameters
+val add: (Int, Int) => Int = (x, y) => x + y
+val add = (x: Int, y: Int) => x + y      // compiler infers result type
+```
+
+### placeholders
+
+Functions whose body use their arguments exactly once don't need to name them - instead you can use a placeholder represented by an underscore.
+
+```scala
+val incremement: Int => Int = x => x + 1
+val incremement: Int => Int = _ + 1      // equivalent using placeholder
+
+val incremement = (x: Int) => x + 1      
+val incremement = (_: Int) + 1           // equivalent using placeholder
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 

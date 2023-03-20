@@ -1,0 +1,105 @@
+---
+title: collection
+---
+
+*********************************************************************
+
+* `scala.collection.immuatable` - e.g. List, most of these are available by default, 
+* `scala.collection.muatable` - e.g. Map, need to import these 
+
+*********************************************************************
+
+## List
+
+* Immutable sequence
+
+```scala
+List.empty
+List.empty[Int]
+List(1, 2, 3, 4)
+1 :: 2 :: Nil // List(1, 2)
+
+x = List(1, 2) // y = List(1, 2)
+y = 0 :: x     // y = List(0, 1, 2)
+z = y :: 3     // z = List(0, 1, 2, 3)
+
+0 +: List(1, 2, 3) // List(0, 1, 2, 3)
+
+x = List(0, 2, 3, 4)
+x.head      // 0
+x.tail      // List(1, 2, 3)
+x.tail.head // 1
+x(0)        // 0
+x(1)        // 1
+```
+
+*********************************************************************
+
+## ArrayBuffer
+
+* Mutable sequence
+
+```scala
+import scala.collection.mutable
+
+mutable.ArrayBuffer.empty
+mutable.ArrayBuffer.empty[Double]
+mutable.ArrayBuffer("a", "b", "c", "d")
+
+mutable.ArrayBuffer("a", "b") :+ "c" // ArrayBuffer("a", "b", "c")
+```
+
+*********************************************************************
+
+## Map
+
+* Immutable dictionary
+* Also known as a hash table or associative array
+
+```scala
+Map.empty
+Map.empty[String, Boolean]
+Map("a" -> true, "b" -> false, "c" -> true, "d" -> false)
+
+Map("a" -> true) + Map("b" -> false) // Map("a" -> true, "b" -> false)
+```
+
+*********************************************************************
+
+## Tuple
+
+* Fixed size
+* values can have different types
+
+```scala
+// construct
+val x: (String, Int) = "asdf" -> 42 // shorthand for constructing tuples with two elements
+val y: (String, Int) = ("asdf", 42)
+val z: (String, Int, Boolean) = ("asdf", 42, true)
+
+// deconstruct
+val x: (String, Int) = ("asdf", 42)
+x(0) // String = "asdf"
+x(1) // Int = 42
+
+val (x, y) = (10.0, 20.0)
+x // 10.0
+y // 20.0
+
+(10.0, "Hello") match
+    case (x, y) => s"first element is $x, second element is $y"
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+

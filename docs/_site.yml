@@ -8,6 +8,11 @@ navbar:
         - text: "basics"
           href: basics.html
         - text: "---------"
+    - text: "std"
+      menu:
+        - text: "collection"
+          href: collection.html
+        - text: "---------"
   right:
     - text: "how2"
       menu:
